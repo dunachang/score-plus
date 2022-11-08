@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成績系統</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #fbfcdb;
+      margin: 50px;
+      display: flex;
+    }
+
+    .std_list {
+      display: flex;
+      width: calc(100% - 300px);
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .std_card {
+      width: 300px;
+      height: 400px;
+      border-radius: 30px;
+      background-color: whitesmoke;
+      text-align: center;
+      margin: 20px;
+    }
+
+    .std_girl {
+      background-color: #e6dee9;
+      border: 2px solid #e2ebf0;
+    }
+
+    .std_boy {
+      background-color: #e2ebf0;
+      border: 2px solid #e6dee9;
+    }
+
+    .std_card img {
+      width: 260px;
+      height: 260px;
+      margin-top: 20px;
+      border-radius: 20px;
+    }
+
+    .std_card ul {
+      margin-top: 20px;
+    }
+
+    .std_info {
+      width: 300px;
+      font-size: 20px;
+      color: whitesmoke;
+      margin: 20px;
+      border-radius: 30px;
+      background-color: #8989ba;
+    }
+
+    .std_info ul {
+      margin: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="std_list">
+    <!-- <div class="std_card std_girl">
+      <img src="./img/girl.jpg" alt="">
+      <ul>
+        <p>Name: Elaine</p>
+        <p>Gender: Girl</p>
+        <p>Number: 01</p>
+      </ul>
+    </div>
+    <div class="std_card std_girl">
+      <img src="./img/girl.jpg" alt="">
+      <ul>
+        <p>Name: Jessica</p>
+        <p>Gender: Girl</p>
+        <p>Number: 02</p>
+      </ul>
+    </div>
+    <div class="std_card std_boy">
+      <img src="./img/boy.jpg" alt="">
+      <ul>
+        <p>Name: Tom</p>
+        <p>Gender: Boy</p>
+        <p>Number: 03</p>
+      </ul>
+    </div>
+    <div class="std_card std_girl">
+      <img src="./img/girl.jpg" alt="">
+      <ul>
+        <p>Name: Duna</p>
+        <p>Gender: Girl</p>
+        <p>Number: 04</p>
+      </ul> -->
+  </div>
+  </div>
+  <div class="std_info">
+    <ul>
+      <p>此學生的段考成績為</p>
+      <p>國文: </p>
+      <p>英文: </p>
+      <p>數學: </p>
+      <p>平均分數為: </p>
+    </ul>
+  </div>
+  <script>
+    const cantainer = document.querySelector('.std_list')
+    const info = document.querySelector('.std_info')
+    const img = document.querySelector('img')
+
+    const std_gender = ['Girl', 'Girl', 'Boy', 'Girl', 'Boy', 'Boy']
+    const std_name = ['Elaine', 'Jessica', 'Tom', 'Duna', 'Tony', 'Jack']
+    const math_grade = [85, 90, 70, 100, 30, 100]
+    const chinese_grade = [60, 50, 70, 60, 50, 100]
+    const english_grade = [90, 70, 80, 70, 40, 90]
+    // 已知 -> 如何輸出卡片到畫面上，如何綁定點擊事件
+    // 未知 -> 如何一次抓取大量元素賦予事件
+    
+    for (let i = 0; i < std_name.length; i++) {
+
+      // 判斷男女去放上對應的圖片
+      let gender
+      if (std_gender[i] == 'Boy') {
+        gender = './img/boy.jpg';
+        cantainer.innerHTML = cantainer.innerHTML + `
+        <div class="std_card std_boy">
+      <img src = ${gender} alt="">
+      <ul>
+        <p>Name: ${std_name[i]}</p>
+        <p>Gender: ${std_gender[i]}</p>
+        <p>Number: ${[i + 1]}</p>
+      </ul>
+    </div>
+    `
+      } else if (std_gender[i] == 'Girl') {
+        gender = './img/girl.jpg';
+        cantainer.innerHTML = cantainer.innerHTML + `
+      <div class="std_card std_girl">
+      <img src= ${gender} alt="">
+      <ul>
+        <p>Name: ${std_name[i]}</p>
+        <p>Gender: ${std_gender[i]}</p>
+        <p>Number: ${[i + 1]}</p>
+      </ul>
+    </div>
+    `
+      }
+    }
+    const card = document.querySelectorAll('.std_card')
+    for (let i = 0; i < card.length; i++){
+      card[i].onclick = function(){
+      info.innerHTML =  `
+      <ul>
+      <p>此學生的段考成績為</p>
+      <p>國文: ${chinese_grade[i]}</p>
+      <p>英文: ${math_grade[i]}</p>
+      <p>數學: ${english_grade[i]}</p>
+      <p>平均分數為: ${((chinese_grade[i] + math_grade[i] + english_grade[i])/ 3).toFixed(0)}</p>
+    </ul>
+      `
+    }
+    }
+    
+  </script>
+</body>
+
+</html>
